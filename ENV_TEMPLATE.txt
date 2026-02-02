@@ -1,0 +1,32 @@
+Firebase Environment Variables for Netlify
+==========================================
+
+Copy these variable names and paste them into Netlify's environment variables section.
+Get the values from your Firebase Console → Project Settings → Your apps → SDK setup and configuration
+
+Variable Name                          | Example Value (replace with your actual values)
+-------------------------------------- | -----------------------------------------------
+VITE_FIREBASE_API_KEY                  | AIzaSyB1234567890abcdefghijklmnopqrst
+VITE_FIREBASE_AUTH_DOMAIN              | your-project-id.firebaseapp.com
+VITE_FIREBASE_PROJECT_ID               | your-project-id
+VITE_FIREBASE_STORAGE_BUCKET           | your-project-id.appspot.com
+VITE_FIREBASE_MESSAGING_SENDER_ID      | 123456789012
+VITE_FIREBASE_APP_ID                   | 1:123456789012:web:abcdef1234567890
+
+HOW TO ADD TO NETLIFY:
+1. Go to your Netlify site dashboard
+2. Click "Site settings"
+3. Click "Environment variables" in the left sidebar
+4. Click "Add a variable"
+5. Enter the variable name (e.g., VITE_FIREBASE_API_KEY)
+6. Enter the value from your Firebase console
+7. Click "Create variable"
+8. Repeat for all 6 variables above
+9. After adding all variables, go to "Deploys" tab
+10. Click "Trigger deploy" → "Clear cache and deploy site"
+
+IMPORTANT NOTES:
+- All variables MUST start with "VITE_" to be accessible in the client
+- Never commit actual values to Git
+- Keep your Firebase API key secure (though it's safe to expose in client-side code)
+- After deployment, add your Netlify domain to Firebase Authorized domains
