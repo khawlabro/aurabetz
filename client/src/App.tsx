@@ -8,7 +8,7 @@ import Landing from "./pages/Landing";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import Onboarding from "./pages/Onboarding";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useFirebaseAuth } from "./hooks/useFirebaseAuth";
 import { upsertUser, getUserProfile } from "./lib/firestore";
 import { useLocation } from "wouter";
@@ -22,7 +22,6 @@ function Router() {
       <Route path={"/dashboard"} component={Dashboard} />
       <Route path={"/profile"} component={Profile} />
       <Route path={"/404"} component={NotFound} />
-      {/* Final fallback route */}
       <Route component={NotFound} />
     </Switch>
   );
@@ -31,15 +30,11 @@ function Router() {
 function App() {
   const { user, loading } = useFirebaseAuth();
   const [location, navigate] = useLocation();
-  const [checkingOnboarding, setCheckingOnboarding] = useState(false);
 
-  // Handle user sync and onboarding redirection
   useEffect(() => {
     const handleUserFlow = async () => {
       if (user && !loading) {
-        setCheckingOnboarding(true);
         try {
-          // 1. Sync user to Firestore
           await upsertUser(user.id, {
             id: user.id,
             email: user.email,
@@ -48,10 +43,7 @@ function App() {
             lastSignedIn: new Date(),
           });
 
-          // 2. Check for onboarding status
           const profile = await getUserProfile(user.id);
-          
-          // Only redirect if we are on landing or root and user hasn't completed onboarding
           const isAtEntry = location === "/" || location === "/preview-landing";
           
           if (isAtEntry) {
@@ -63,14 +55,12 @@ function App() {
           }
         } catch (error) {
           console.error("Error in user flow:", error);
-        } finally {
-          setCheckingOnboarding(false);
         }
       }
     };
 
     handleUserFlow();
-  }, [user, loading, navigate]);
+  }, [user, loading, navigate, location]);
 
   return (
     <ErrorBoundary>

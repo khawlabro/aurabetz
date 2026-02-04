@@ -83,14 +83,12 @@ export default function Onboarding() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center px-4 py-8 relative overflow-hidden">
-      {/* Original design background glow */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute top-0 right-0 w-96 h-96 bg-purple-900/20 rounded-full blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-900/20 rounded-full blur-3xl"></div>
       </div>
 
       <div className="max-w-4xl w-full flex flex-col items-center relative z-10">
-        {/* Header Section - Minimalist */}
         <div className="text-center space-y-3 mb-10">
           <h1 className="text-3xl md:text-5xl font-black tracking-tight">
             Which sports do you want picks for?
@@ -100,7 +98,6 @@ export default function Onboarding() {
           </p>
         </div>
 
-        {/* Sports Selection - 2 Rows, Smaller Buttons */}
         <div className="flex flex-wrap justify-center gap-2 md:gap-3 max-w-4xl">
           {POPULAR_SPORTS.map((sport) => {
             const isSelected = selected.includes(sport.id);
@@ -111,7 +108,7 @@ export default function Onboarding() {
                 onClick={() => toggleSport(sport.id)}
                 className={`
                   px-4 py-2.5 md:px-5 md:py-3 rounded-full font-bold text-sm md:text-base transition-all duration-200 flex items-center gap-2 border
-                  \${
+                  ${
                     isDisabled
                       ? "bg-gray-900/30 text-gray-600 border-gray-800/50 cursor-not-allowed opacity-50"
                       : isSelected
@@ -127,20 +124,18 @@ export default function Onboarding() {
           })}
         </div>
 
-        {/* Selection Counter */}
         <div className="mt-6 text-gray-500 text-xs font-medium">
           {selected.length} of 5 selected
         </div>
       </div>
 
-      {/* Bottom Action Bar - Compact */}
       <div className="mt-12 w-full max-w-md flex flex-col items-center gap-4 relative z-10">
         <Button
           onClick={() => handleSave(false)}
           disabled={selected.length === 0 || saving}
           className={`
             w-full py-6 rounded-xl font-bold text-lg transition-all
-            \${
+            ${
               selected.length === 0 || saving
                 ? "bg-gray-800 text-gray-500 cursor-not-allowed"
                 : "bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/20"
@@ -150,7 +145,7 @@ export default function Onboarding() {
           {saving ? (
             <Loader2 className="w-5 h-5 animate-spin" />
           ) : (
-            \`Show my picks (\${selected.length}/5)\`
+            `Show my picks (${selected.length}/5)`
           )}
         </Button>
 
