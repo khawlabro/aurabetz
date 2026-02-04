@@ -88,6 +88,8 @@ export async function getUserProfile(userId: string): Promise<UserProfile | null
         photoURL: data.photoURL || null,
         createdAt: data.createdAt?.toDate() || new Date(),
         lastSignedIn: data.lastSignedIn?.toDate() || new Date(),
+        preferredSports: data.preferredSports || undefined,
+        wantsAllPicks: data.wantsAllPicks || undefined,
       };
     }
     
