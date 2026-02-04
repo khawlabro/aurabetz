@@ -39,6 +39,8 @@ export interface UserProfile {
   photoURL: string | null;
   createdAt: Date;
   lastSignedIn: Date;
+  preferredSports?: string[];
+  wantsAllPicks?: boolean;
 }
 
 // Collections

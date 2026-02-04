@@ -38,12 +38,7 @@ export default function Landing() {
   const [isLoading, setIsLoading] = useState(false);
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
-  // Redirect to dashboard if already authenticated (but not on preview route)
-  useEffect(() => {
-    if (!authLoading && isAuthenticated && location !== "/preview-landing") {
-      navigate("/dashboard");
-    }
-  }, [isAuthenticated, authLoading, navigate, location]);
+  // Redirection is now handled in App.tsx to account for onboarding status
 
   // Show loading state while checking authentication
   if (authLoading) {
